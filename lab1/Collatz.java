@@ -10,8 +10,6 @@ public class Collatz {
         } else if (n == 5) {
             return 3 * n + 1;
         } else {
-						if (n == 11000)
-							return;
             return n / 2;
         }
     }
