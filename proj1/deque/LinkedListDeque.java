@@ -3,7 +3,9 @@ package deque;
 import net.sf.saxon.om.Item;
 import org.w3c.dom.Node;
 
-public class LinkedListDeque<T> {
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Deque<T> {
 
 
     private class Node{
@@ -20,6 +22,7 @@ public class LinkedListDeque<T> {
     private Node sentinel;
     private int size;
 
+    @Override
     public void printDeque() {
         Node p = sentinel.next;
         while (p.next != sentinel.next) {
@@ -34,6 +37,7 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
+    @Override
     public void addLast(T item){
         size++;
         Node p = sentinel.next;
@@ -52,6 +56,7 @@ public class LinkedListDeque<T> {
 
     }
 
+    @Override
     public void addFirst(T item){
         size++;
         Node p = sentinel.next;
@@ -72,6 +77,7 @@ public class LinkedListDeque<T> {
 
     }
 
+    @Override
     public T removeLast(){
         if(size == 0){
             return null;
@@ -85,6 +91,25 @@ public class LinkedListDeque<T> {
         p.previous.next = p.next;
         sentinel.next.previous = p.previous;
         return p.item;
+    }
+
+    @Override
+    public T get(int index) {
+        if(index < 0 || index >= size){
+            return null;
+        }
+        Node p = sentinel.next;
+        for (int i = 0; i< index; i++){
+            while(p.next != sentinel.next){
+                p = p.next;
+            }
+        }
+        return p.item;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
     }
 
     public T removeFirst(){
