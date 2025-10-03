@@ -1,7 +1,6 @@
 package deque;
 
 import net.sf.saxon.om.Item;
-import org.w3c.dom.Node;
 
 import java.util.Iterator;
 
@@ -109,7 +108,28 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new LinkedListDequeIterator();
+    }
+
+    private class LinkedListDequeIterator implements Iterator<T>{
+        private Node p;
+
+        LinkedListDequeIterator(){
+            p = sentinel.next;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return p == sentinel;
+        }
+
+        @Override
+        public T next() {
+            T item = p.item;
+            p = p.next;
+            return item;
+        }
     }
 
     public T removeFirst(){
