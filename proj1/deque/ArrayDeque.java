@@ -30,7 +30,7 @@ public class ArrayDeque<T> {
     public void addFirst(T item){
         if (isFull()){
             this.resize(2);
-            
+
         }
         else {
             items[nextFirst++] = item;
