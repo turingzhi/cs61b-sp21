@@ -1,17 +1,17 @@
 package deque;
 
-import net.sf.saxon.om.Item;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T> {
 
 
-    private class Node{
+    private class Node {
         public T item;
         public Node next;
         public Node previous;
-        public Node(T item, Node next, Node previous){
+        public Node(T item, Node next, Node previous) {
             this.item = item;
             this.next = next;
             this.previous = previous;
@@ -31,21 +31,21 @@ public class LinkedListDeque<T> implements Deque<T> {
         System.out.println(p.item.toString());
     }
 
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         sentinel = new Node(null, null, null);
         size = 0;
     }
 
     @Override
-    public void addLast(T item){
-        size++;
+    public void addLast(T item) {
+        size ++;
         Node p = sentinel.next;
-        if(p!=null){
-            while(p.next != sentinel.next){
+        if (p != null) {
+            while(p.next != sentinel.next) {
                 p = p.next;
             }
             p.next = new Node(item,sentinel.next,p);
-        }else{
+        }else {
             p = new Node(item,null,null);
             sentinel.next = p;
             p.next = sentinel.next;
@@ -56,16 +56,16 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public void addFirst(T item){
-        size++;
+    public void addFirst(T item) {
+        size ++;
         Node p = sentinel.next;
-        if(p != null){
-            while(p.next != sentinel.next){
+        if (p != null) {
+            while(p.next != sentinel.next) {
                 p = p.next;
             }
             p.next = new Node(item,sentinel.next,p);
             sentinel.next = p.next;
-        }else{
+        } else {
             p = new Node(item,null,null);
             sentinel.next = p;
             p.next = sentinel.next;
@@ -77,13 +77,13 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public T removeLast(){
-        if(size == 0){
+    public T removeLast() {
+        if (size == 0) {
             return null;
         }
-        size--;
+        size --;
         Node p = sentinel.next;
-        while(p.next != sentinel.next){
+        while (p.next != sentinel.next) {
             p = p.next;
         }
 
@@ -94,19 +94,19 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        if(index < 0 || index >= size){
+        if (index < 0 || index >= size){
             return null;
         }
         Node p = sentinel.next;
-        for (int i = 0; i< index; i++){
-            while(p.next != sentinel.next){
+        for (int i = 0; i < index; i ++){
+            while (p.next != sentinel.next){
                 p = p.next;
             }
         }
         return p.item;
     }
 
-    @Override
+    @NotNull
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
@@ -132,13 +132,14 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    public T removeFirst(){
-        if(size == 0){
+    @Override
+    public T removeFirst() {
+        if (size == 0){
             return null;
         }
-        size--;
+        size --;
         Node p = sentinel.next;
-        while(p.next != sentinel.next){
+        while (p.next != sentinel.next){
             p = p.next;
         }
         Node q = p.next;
@@ -147,24 +148,26 @@ public class LinkedListDeque<T> implements Deque<T> {
         return q.item;
     }
 
-    public int size(){
+    @Override
+    public int size() {
         return size;
     }
-    public boolean isEmpty(){
+    @Override
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public Node getLast(){
+    public Node getLast() {
         Node p = sentinel.next;
-        while(p.next != sentinel.next){
+        while (p.next != sentinel.next) {
             p = p.next;
         }
         return p;
     }
 
-    public T getRecursive(int index){
+    public T getRecursive(int index) {
         Node p = sentinel.next;
-        for(int i = 0; i < index; i++){
+        for (int i = 0; i < index; i ++) {
             p = p.next;
         }
         return p.item;

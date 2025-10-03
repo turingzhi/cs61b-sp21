@@ -1,5 +1,7 @@
 package deque;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 import java.util.Iterator;
 
 public class ArrayDeque<T> implements Deque<T> {
@@ -22,25 +24,26 @@ public class ArrayDeque<T> implements Deque<T> {
         return nextFirst == nextLast;
     }
 
+
     public int size(){
         return size;
     }
 
     @Override
     public void printDeque() {
-        for (int i = 0; i < size(); i++) {
-            System.out.print(items[i+nextFirst+1] + " ");
+        for (int i = 0; i < size(); i ++) {
+            System.out.print(items[i + nextFirst + 1] + " ");
         }
 
     }
 
     @Override
     public T removeFirst() {
-        if (size > 0){
+        if (size > 0) {
             nextFirst = nextFirst + 1;
             T ret = items[nextFirst];
             items[nextFirst] = null;
-            size--;
+            size --;
             return ret;
         }
         return null;
@@ -48,11 +51,11 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
-        if(size > 0){
+        if (size > 0) {
             nextLast = nextLast - 1;
             T ret = items[nextLast];
             items[nextLast] = null;
-            size--;
+            size --;
             return ret;
         }
         return null;
@@ -63,7 +66,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return items[index];
     }
 
-    @Override
+    @NotNull
     public Iterator<T> iterator() {
         return new ArrayIterator();
     }
@@ -81,31 +84,32 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
-    public void resize(int scale){
+    public void resize(int scale) {
         size = size * scale;
 
     }
 
-    public void addFirst(T item){
-        if (isFull()){
+    @Override
+    public void addFirst(T item) {
+        if (isFull()) {
             this.resize(2);
 
         }
         else {
-            items[nextFirst--] = item;
+            items[nextFirst --] = item;
             size++;
         }
     }
 
     @Override
     public void addLast(T item) {
-        if (isFull()){
+        if (isFull()) {
             this.resize(2);
 
         }
         else {
-            items[nextLast++] = item;
-            size++;
+            items[nextLast ++] = item;
+            size ++;
         }
 
     }
