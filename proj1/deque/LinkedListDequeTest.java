@@ -116,6 +116,30 @@ public class LinkedListDequeTest {
     }
 
     @Test
+    public void Test123() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        lld1.addFirst(0);
+        lld1.addFirst(1);
+        lld1.removeLast();
+        lld1.addFirst(3);
+        lld1.addFirst(4);
+        lld1.addFirst(5);
+        lld1.addFirst(6);
+        lld1.addFirst(7);
+        lld1.isEmpty();
+        assertEquals("Should have the same value", (Integer) 1, lld1.removeLast());
+    }
+
+    @Test
+    public void Test1231() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        lld1.addLast(0);
+        lld1.removeFirst();
+        lld1.addLast(2);
+        assertEquals("Should have the same value", (Integer) 2, lld1.removeFirst());
+    }
+
+
     /* Add large number of elements to deque; check if order is correct. */
     public void bigLLDequeTest() {
 
@@ -143,4 +167,6 @@ public class LinkedListDequeTest {
 
 
     }
+
+
 }

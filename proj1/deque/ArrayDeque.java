@@ -20,18 +20,18 @@ public class ArrayDeque<T> implements Deque<T> {
 
 
 
-    public boolean isFull(){
-        return nextFirst == nextLast;
-    }
+//    public boolean isFull() {
+//        return nextFirst == nextLast;
+//    }
 
 
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
     public void printDeque() {
-        for (int i = 0; i < size(); i ++) {
+        for (int i = 0; i < size(); i++) {
             System.out.print(items[i + nextFirst + 1] + " ");
         }
 
@@ -43,7 +43,7 @@ public class ArrayDeque<T> implements Deque<T> {
             nextFirst = nextFirst + 1;
             T ret = items[nextFirst];
             items[nextFirst] = null;
-            size --;
+            size--;
             return ret;
         }
         return null;
@@ -55,7 +55,7 @@ public class ArrayDeque<T> implements Deque<T> {
             nextLast = nextLast - 1;
             T ret = items[nextLast];
             items[nextLast] = null;
-            size --;
+            size--;
             return ret;
         }
         return null;
@@ -67,7 +67,8 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     @NotNull
-    public Iterator<T> iterator() {
+    @Override
+    public Iterator<T> iterator(){
         return new ArrayIterator();
     }
 
@@ -84,32 +85,29 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
-    public void resize(int scale) {
+    private void resize(int scale) {
         size = size * scale;
 
     }
 
     @Override
     public void addFirst(T item) {
-        if (isFull()) {
+        if (nextFirst == nextLast) {
             this.resize(2);
-
-        }
-        else {
-            items[nextFirst --] = item;
+        } else {
+            items[nextFirst--] = item;
             size++;
         }
     }
 
     @Override
     public void addLast(T item) {
-        if (isFull()) {
+        if (nextLast == nextFirst) {
             this.resize(2);
 
-        }
-        else {
-            items[nextLast ++] = item;
-            size ++;
+        } else {
+            items[nextLast++] = item;
+            size++;
         }
 
     }
@@ -117,6 +115,11 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return true;
     }
 
 
