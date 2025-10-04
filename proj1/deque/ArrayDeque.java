@@ -7,36 +7,38 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private int nextFirst;
     private int nextLast;
     private int size;
+    private int length;
 
     @SuppressWarnings("unchecked")
     public ArrayDeque() {
         items = (T[]) new Object[8];
-        size = 0;
-        nextFirst = 3;
-        nextLast = 4;
+        size = 8;
+        length = 0;
+        nextFirst = 0;
+        nextLast = 1;
     }
 
 
     @Override
     public int size() {
-        return size;
+        return length;
     }
 
     @Override
     public void printDeque() {
-        for (int i = 0; i < size(); i++) {
-            System.out.print(items[(i + nextFirst + 1) % 8] + " ");
+        for (int i = 0; i < length; i++) {
+            System.out.print(items[(i + nextFirst + 1) % size] + " ");
         }
 
     }
 
     @Override
     public T removeFirst() {
-        if (size > 0) {
+        if (length > 0) {
             nextFirst = (nextFirst + 1) % size;
             T ret = items[nextFirst];
             items[nextFirst] = null;
-            size--;
+            length--;
             return ret;
         }
         return null;
@@ -44,11 +46,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeLast() {
-        if (size > 0) {
+        if (length > 0) {
             nextLast = (nextLast - 1) % size;
             T ret = items[nextLast];
             items[nextLast] = null;
-            size--;
+            length--;
             return ret;
         }
         return null;
@@ -56,7 +58,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T get(int index) {
-        return items[index];
+        return items[index + nextFirst];
     }
 
 
@@ -78,31 +80,47 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     private void resize(int scale) {
-        size = size * scale;
+        T[] temp = (T[]) new Object[size * scale];
+        int i = nextFirst;
+        int j = 0;
+        while (j < this.length) {
+            temp[j] = items[i];
+            i = (i + 1) % size;
+            j++;
+        }
+        this.size = size * scale;
+        nextFirst = 0;
+        if (isEmpty()) {
+            nextLast = 0;
+        } else {
+            nextLast = j - 1;
+        }
+        items = temp;
 
     }
 
     @Override
     public void addFirst(T item) {
-        if (nextFirst == nextLast) {
+        if (length == size) {
             this.resize(2);
-        } else {
-            items[nextFirst] = item;
-            nextFirst = (nextFirst - 1 + 8) % 8;
-            size++;
+            System.out.println(size);
         }
+
+        items[nextFirst] = item;
+        nextFirst = (nextFirst - 1 + size) % size;
+        length++;
+
     }
 
     @Override
     public void addLast(T item) {
-        if (nextLast == nextFirst) {
+        if (length == size) {
             this.resize(2);
-
-        } else {
-            items[nextLast] = item;
-            nextLast = (nextLast + 1) % 8;
-            size++;
+            System.out.println(size);
         }
+        items[nextLast] = item;
+        nextLast = (nextLast + 1 + size) % size;
+        length++;
 
     }
 

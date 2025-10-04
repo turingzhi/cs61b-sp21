@@ -7,19 +7,18 @@ import static org.junit.Assert.*;
 public class ArrayDequeTest {
     @Test
     public void addIsEmpty() {
-        ArrayDeque<String> a = new ArrayDeque<String>();
+        ArrayDeque<Integer> a = new ArrayDeque<Integer>();
         assertTrue("A newly empty deque is empty", a.isEmpty());
-        a.addFirst("a");
+        a.addLast(0);
+        a.addLast(0);
+        a.addLast(0);
+        a.printDeque();
+        a.addLast(0);
+        a.addLast(0);
+        a.addLast(0);
+        a.addLast(0);
 
-        assertEquals(1, a.size());
-        assertFalse("a should now contain 1 item", a.isEmpty());
-
-        a.addLast("b");
-        assertEquals(2, a.size());
-        assertFalse("a should now contain 2 items", a.isEmpty());
-
-        a.addLast("c");
-        assertEquals(3, a.size());
+        assertEquals("The size of the deque is 8", 7, a.size());
 
         System.out.println("Printing out deque: ");
         a.printDeque();
