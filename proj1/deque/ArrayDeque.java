@@ -34,7 +34,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeFirst() {
-        if (length < 0.25 * size) {
+        if (length < 0.25 * size && length > 1) {
             resize((int) (0.5 * size));
         }
         if (length > 0) {
@@ -49,11 +49,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeLast() {
-        if (length < 0.25 * size) {
+        if (length < 0.25 * size && length > 1) {
             resize((int) (0.5 * size));
         }
         if (length > 0) {
-            nextLast = (nextLast - 1) % size;
+            nextLast = (nextLast - 1 + size) % size;
             T ret = items[nextLast];
             items[nextLast] = null;
             length--;
@@ -74,14 +74,21 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private class ArrayIterator implements Iterator<T> {
 
+        private int index;
+
+        public ArrayIterator() {
+            index = 0;
+        }
+
         @Override
         public boolean hasNext() {
-            return false;
+            return index < length;
         }
 
         @Override
         public T next() {
-            return null;
+            index = (index + 1) % size;
+            return  items[(index + nextFirst) % size];
         }
     }
 

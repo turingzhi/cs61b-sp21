@@ -9,14 +9,14 @@ public class ArrayDequeTest {
     public void addIsEmpty() {
         ArrayDeque<Integer> a = new ArrayDeque<Integer>();
         assertTrue("A newly empty deque is empty", a.isEmpty());
-        a.addLast(0);
-        a.removeFirst();
-        a.addLast(2);
+        a.addFirst(0);
         a.removeLast();
-        a.addLast(4);
+        a.addFirst(2);
+        a.addLast(3);
+        a.removeFirst();
         a.removeLast();
         a.addFirst(6);
-        System.out.println(a.get(0));
+        System.out.println(a.removeLast());
         System.out.println("Printing out deque: ");
         a.printDeque();
     }

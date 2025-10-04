@@ -1,11 +1,41 @@
 package deque;
 
+import jh61b.junit.In;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 import static org.junit.Assert.*;
 
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
+
+
+    @Test
+    public void test1() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>();
+
+        ArrayDeque<Integer> a2 = new ArrayDeque<Integer>();
+
+        lld1.addFirst(2);
+        lld1.addFirst(3);
+        lld1.addFirst(4);
+        lld1.addLast(5);
+        lld2.addFirst(2);
+        lld2.addFirst(3);
+        lld2.addFirst(4);
+        a2.addFirst(2);
+        a2.addFirst(3);
+        a2.addFirst(4);
+        a2.addLast(5);
+
+        System.out.println(lld1.equals(a2));
+        System.out.println(lld1.equals(lld2));
+    }
 
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
