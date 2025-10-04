@@ -35,7 +35,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public T removeFirst() {
         if (length < 0.25 * size) {
-            resize((int)(0.5 * size));
+            resize((int) (0.5 * size));
         }
         if (length > 0) {
             nextFirst = (nextFirst + 1) % size;
@@ -50,7 +50,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public T removeLast() {
         if (length < 0.25 * size) {
-            resize((int)(0.5 * size));
+            resize((int) (0.5 * size));
         }
         if (length > 0) {
             nextLast = (nextLast - 1) % size;

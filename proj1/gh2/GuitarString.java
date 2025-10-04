@@ -3,7 +3,6 @@ package gh2;
 import deque.Deque;
 
 import deque.ArrayDeque;
-import deque.Deque;
 
 //Note: This file will not compile until you complete the Deque implementations
 public class GuitarString {
@@ -35,9 +34,7 @@ public class GuitarString {
         //       are different from each other. It means you should repeatedly call
         //       Math.random() - 0.5 to generate new random numbers for each array index.
         for (int i = 0; i < this.buffer.size(); i++) {
-            this.buffer.removeLast();
-        }
-        for (int i = 0; i < this.buffer.size(); i++) {
+            this.buffer.removeFirst();
             double r = Math.random() - 0.5;
             this.buffer.addLast(r);
         }
