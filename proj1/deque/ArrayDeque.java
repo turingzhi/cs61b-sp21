@@ -19,12 +19,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
 
-
-//    public boolean isFull() {
-//        return nextFirst == nextLast;
-//    }
-
-
+    @Override
     public int size() {
         return size;
     }
@@ -32,7 +27,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public void printDeque() {
         for (int i = 0; i < size(); i++) {
-            System.out.print(items[i + nextFirst + 1] + " ");
+            System.out.print(items[(i + nextFirst + 1) % size] + " ");
         }
 
     }
@@ -40,7 +35,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public T removeFirst() {
         if (size > 0) {
-            nextFirst = nextFirst + 1;
+            nextFirst = (nextFirst + 1) % size;
             T ret = items[nextFirst];
             items[nextFirst] = null;
             size--;
@@ -52,7 +47,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public T removeLast() {
         if (size > 0) {
-            nextLast = nextLast - 1;
+            nextLast = (nextLast - 1) % size;
             T ret = items[nextLast];
             items[nextLast] = null;
             size--;
@@ -66,8 +61,8 @@ public class ArrayDeque<T> implements Deque<T> {
         return items[index];
     }
 
-    @NotNull
-    public Iterator<T> iterator(){
+    @Override
+    public Iterator<T> iterator() {
         return new ArrayIterator();
     }
 
@@ -94,7 +89,8 @@ public class ArrayDeque<T> implements Deque<T> {
         if (nextFirst == nextLast) {
             this.resize(2);
         } else {
-            items[nextFirst--] = item;
+            items[nextFirst] = item;
+            nextFirst = (nextFirst - 1) % size;
             size++;
         }
     }
@@ -105,7 +101,8 @@ public class ArrayDeque<T> implements Deque<T> {
             this.resize(2);
 
         } else {
-            items[nextLast++] = item;
+            items[nextLast] = item;
+            nextLast = (nextLast + 1) % size;
             size++;
         }
 

@@ -83,10 +83,7 @@ public class LinkedListDeque<T> implements Deque<T> {
             sentinel.next = null;
             return p.item;
         }
-        Node p = sentinel.next;
-        while (p.next != sentinel.next) {
-            p = p.next;
-        }
+        Node p = sentinel.next.previous;
 
         p.previous.next = p.next;
         sentinel.next.previous = p.previous;
@@ -107,7 +104,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         return p.item;
     }
 
-    @NotNull
+    @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
