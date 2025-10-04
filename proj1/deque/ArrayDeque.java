@@ -34,6 +34,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeFirst() {
+        if (length < 0.25 * size) {
+            resize((int)(0.5 * size));
+        }
         if (length > 0) {
             nextFirst = (nextFirst + 1) % size;
             T ret = items[nextFirst];
@@ -46,6 +49,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeLast() {
+        if (length < 0.25 * size) {
+            resize((int)(0.5 * size));
+        }
         if (length > 0) {
             nextLast = (nextLast - 1) % size;
             T ret = items[nextLast];
@@ -58,7 +64,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T get(int index) {
-        return items[index + nextFirst];
+        return items[(index + nextFirst + 1) % size ];
     }
 
 
@@ -79,8 +85,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
     }
 
-    private void resize(int scale) {
-        T[] temp = (T[]) new Object[size * scale];
+    private void resize(int newSize) {
+        T[] temp = (T[]) new Object[newSize];
         int i = nextFirst;
         int j = 0;
         while (j < this.length) {
@@ -88,7 +94,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             temp[j] = items[i];
             j++;
         }
-        this.size = size * scale;
+        this.size = newSize;
         nextFirst = size - 1;
         if (isEmpty()) {
             nextLast = 0;
@@ -102,7 +108,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public void addFirst(T item) {
         if (length == size) {
-            this.resize(2);
+            this.resize(2 * size);
             System.out.println(size);
         }
 
@@ -115,7 +121,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public void addLast(T item) {
         if (length == size) {
-            this.resize(2);
+            this.resize(size * 2);
             System.out.println(size);
         }
         items[nextLast] = item;
