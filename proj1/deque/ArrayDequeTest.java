@@ -11,22 +11,22 @@ public class ArrayDequeTest {
         assertTrue("A newly empty deque is empty", a.isEmpty());
         a.addFirst("a");
 
-        assertEquals(1,a.size());
+        assertEquals(1, a.size());
         assertFalse("a should now contain 1 item", a.isEmpty());
 
         a.addLast("b");
-        assertEquals(2,a.size());
+        assertEquals(2, a.size());
         assertFalse("a should now contain 2 items", a.isEmpty());
 
         a.addLast("c");
-        assertEquals(3,a.size());
+        assertEquals(3, a.size());
 
         System.out.println("Printing out deque: ");
         a.printDeque();
     }
 
     @Test
-    public void addRemoveTest(){
+    public void addRemoveTest() {
         ArrayDeque<Integer> array = new ArrayDeque<Integer>();
         // should be empty
         assertTrue("array should be empty upon initialization", array.isEmpty());

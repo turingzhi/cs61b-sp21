@@ -151,14 +151,6 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
 
-//    public Node getLast() {
-//        Node p = sentinel.next;
-//        while (p.next != sentinel.next) {
-//            p = p.next;
-//        }
-//        return p;
-//    }
-
     public T getRecursive(int index) {
         Node p = sentinel.next;
         for (int i = 0; i < index; i++) {
@@ -167,9 +159,20 @@ public class LinkedListDeque<T> implements Deque<T> {
         return p.item;
     }
 
-
     @Override
     public boolean equals(Object o) {
+        if (!(o instanceof Deque) || ((Deque<?>) o).size() != this.size()) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        for (int i = 0; i < this.size(); i++) {
+            Object item = ((Deque<?>) o).get(i);
+            if (!(this.get(i).equals(item))) {
+                return false;
+            }
+        }
         return true;
     }
 }
