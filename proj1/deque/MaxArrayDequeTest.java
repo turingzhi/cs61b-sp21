@@ -16,6 +16,7 @@ public class MaxArrayDequeTest {
         m.addFirst(4);
         System.out.println(m.size());
         System.out.println(m.max());
+        System.out.println(m.max(Comparator.comparing(Integer::intValue)));
 
     }
 }
