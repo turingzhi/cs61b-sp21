@@ -84,16 +84,16 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         int i = nextFirst;
         int j = 0;
         while (j < this.length) {
-            temp[j] = items[i];
             i = (i + 1) % size;
+            temp[j] = items[i];
             j++;
         }
         this.size = size * scale;
-        nextFirst = 0;
+        nextFirst = size - 1;
         if (isEmpty()) {
             nextLast = 0;
         } else {
-            nextLast = j - 1;
+            nextLast = j;
         }
         items = temp;
 

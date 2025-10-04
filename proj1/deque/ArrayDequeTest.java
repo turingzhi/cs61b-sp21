@@ -9,16 +9,22 @@ public class ArrayDequeTest {
     public void addIsEmpty() {
         ArrayDeque<Integer> a = new ArrayDeque<Integer>();
         assertTrue("A newly empty deque is empty", a.isEmpty());
+        a.addLast(1);
         a.addLast(0);
         a.addLast(0);
-        a.addLast(0);
-        a.printDeque();
         a.addLast(0);
         a.addLast(0);
         a.addLast(0);
         a.addLast(0);
 
+
         assertEquals("The size of the deque is 8", 7, a.size());
+        a.addLast(0);
+        a.printDeque();
+        a.addLast(9);
+        a.addFirst(2);
+
+
 
         System.out.println("Printing out deque: ");
         a.printDeque();
