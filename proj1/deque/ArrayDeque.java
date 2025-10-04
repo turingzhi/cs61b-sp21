@@ -76,7 +76,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
         private int index;
 
-        public ArrayIterator() {
+        ArrayIterator() {
             index = 0;
         }
 

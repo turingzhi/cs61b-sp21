@@ -9,48 +9,29 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     private int size;
     private Comparator<T> comparator;
     public MaxArrayDeque(Comparator<T> c) {
-        items = (T[]) new Object[8];
-        size = 0;
-        nextFirst = 3;
-        nextLast = 4;
+        super();
         comparator = c;
     }
 
     public T max() {
-        if (size == 0) {
-            return null;
-        }
-
-        int i = nextFirst + 1;   // logical first index
-        T best = items[i];
-
-        for (int seen = 1; seen < size; seen++) {
-            i = (i + 1) % items.length;
-            T x = items[i];
-            if (comparator.compare(x, best) > 0) {
-                best = x;
-            }
-        }
-        return best;
-
+        return getMax(this.comparator);
     }
 
     public T max(Comparator<T> c) {
-        if (size == 0) {
+       return getMax(c);
+    }
+
+    private T getMax(Comparator<T> c) {
+        if (this.size() == 0) {
             return null;
         }
-
-        comparator = c;
-        int i = nextFirst + 1;   // logical first index
-        T best = items[i];
-
-        for (int seen = 1; seen < size; seen++) {
-            i = (i + 1) % items.length;
-            T x = items[i];
-            if (comparator.compare(x, best) > 0) {
-                best = x;
+        T max = this.get(0);
+        for (int i = 1; i < this.size(); i++) {
+            T temp = this.get(i);
+            if (c.compare(temp, max) < 0) {
+                max = temp;
             }
         }
-        return best;
+        return max;
     }
 }
