@@ -1,10 +1,8 @@
 package deque;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private T[] items;
     private int nextFirst;
     private int nextLast;
@@ -61,7 +59,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return items[index];
     }
 
-    @Override
+
     public Iterator<T> iterator() {
         return new ArrayIterator();
     }
@@ -108,10 +106,6 @@ public class ArrayDeque<T> implements Deque<T> {
 
     }
 
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
     @Override
     public boolean equals(Object o) {

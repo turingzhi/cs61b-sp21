@@ -1,7 +1,5 @@
 package deque;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T> {
@@ -104,7 +102,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         return p.item;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
@@ -153,10 +150,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         return size;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
 //    public Node getLast() {
 //        Node p = sentinel.next;
