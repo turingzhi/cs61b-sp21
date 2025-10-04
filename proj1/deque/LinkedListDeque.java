@@ -175,6 +175,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return true;
     }
