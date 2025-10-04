@@ -67,7 +67,6 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     @NotNull
-    @Override
     public Iterator<T> iterator(){
         return new ArrayIterator();
     }
