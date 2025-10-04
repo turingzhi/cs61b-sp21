@@ -25,7 +25,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public void printDeque() {
         for (int i = 0; i < size(); i++) {
-            System.out.print(items[(i + nextFirst + 1) % size] + " ");
+            System.out.print(items[(i + nextFirst + 1) % 8] + " ");
         }
 
     }
@@ -88,7 +88,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             this.resize(2);
         } else {
             items[nextFirst] = item;
-            nextFirst = (nextFirst - 1) % size;
+            nextFirst = (nextFirst - 1 + 8) % 8;
             size++;
         }
     }
@@ -100,7 +100,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
         } else {
             items[nextLast] = item;
-            nextLast = (nextLast + 1) % size;
+            nextLast = (nextLast + 1) % 8;
             size++;
         }
 
