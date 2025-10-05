@@ -118,7 +118,9 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
         @Override
         public T next() {
-            if (!hasNext()) return null;
+            if (!hasNext()) {
+                return null;
+            }
             T v = cur.item;
             cur = cur.next;  // advance AFTER reading
             seen++;
